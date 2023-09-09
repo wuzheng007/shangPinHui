@@ -42,6 +42,11 @@ module.exports = {
         ws: true,
         changeOrigin: true,
         pathRewrite: { '^/dev-api': '' }
+      },
+      '/admin/product/fileUpload': {
+        target: 'http://gmall-h5-api.atguigu.cn',
+        ws: true,
+        changeOrigin: true
       }
     }
     // before: require('./mock/mock-server.js')
