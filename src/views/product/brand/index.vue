@@ -78,7 +78,7 @@
 </template>
 
 <script>
-import { getBarndPage, addTrademark, updateTrademark, removeTrademark } from '@/api/brand.js'
+import { getBarndPage, addTrademark, updateTrademark, removeTrademark } from '@/api/product.js'
 export default {
   name: 'Brand',
   data() {
