@@ -257,3 +257,60 @@ export function findBySpuId(spuId) {
     url: `/admin/product/findBySpuId/${spuId}`
   })
 }
+/**
+ * @Date 2023-09-23 18:45:52
+ * @introduction 获取Sku列表（分页）
+ * @description 详细描述
+ * @param {参数类型} 参数 参数说明
+ */
+export function getSkuList(page,limit) {
+  return request({
+    url: `/admin/product/list/${page}/${limit}`
+  })
+}
+
+/**
+ * @Date 2023-09-23 20:33:33
+ * @introduction 上架
+ * @description 详细描述
+ * @param {参数类型} 参数 参数说明
+ */
+export function onSale(skuId) {
+  return request({
+    url: `/admin/product/onSale/${skuId}`
+  })
+}
+/**
+ * @Date 2023-09-23 20:33:47
+ * @introduction 下架
+ * @description 详细描述
+ * @param {参数类型} 参数 参数说明
+ */
+export function cancelSale(skuId) {
+  return request({
+    url: `/admin/product/cancelSale/${skuId}`
+  })
+}
+/**
+ * @Date 2023-09-23 21:01:13
+ * @introduction 根据id获取sku信息
+ * @description 详细描述
+ * @param {参数类型} 参数 参数说明
+ */
+export function getSkuById(skuId) {
+  return request({
+    url: `/admin/product/getSkuById/${skuId}`
+  })
+}
+/**
+ * @Date 2023-09-23 22:13:42
+ * @introduction 删除sku
+ * @description 详细描述
+ * @param {参数类型} 参数 参数说明
+ */
+export function deleteSku(skuId) {
+  return request({
+    url: `/admin/product/deleteSku/${skuId}`,
+    method: 'delete'
+  })
+}
