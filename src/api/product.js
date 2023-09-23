@@ -127,3 +127,133 @@ export function delAttr(attrId) {
     method: 'delete'
   })
 }
+/* =======================spu管理相关======================== */
+/**
+ * @Date 2023-09-10 17:09:46
+ * @introduction 获取spu分页列表
+ * @description 详细描述
+ * @param {参数类型} 参数 参数说明
+ */
+export function getSpuPage(page, limit, params) {
+  return request({
+    url: `/admin/product/${page}/${limit}`,
+    params
+  })
+}
+/**
+ * @Date 2023-09-17 22:56:18
+ * @introduction 获取品牌数据
+ * @description 详细描述
+ * @param {参数类型} 参数 参数说明
+ */
+export function getTrademarkList() {
+  return request({
+    url: '/admin/product/baseTrademark/getTrademarkList'
+  })
+}
+/**
+ * @Date 2023-09-21 23:20:42
+ * @introduction 获取销售属性
+ * @description 详细描述
+ * @param {参数类型} 参数 参数说明
+ */
+export function getBaseSaleAttrList() {
+  return request({
+    url: '/admin/product/baseSaleAttrList'
+  })
+}
+/**
+ * @Date 2023-09-22 10:32:17
+ * @introduction 保存spu信息
+ * @description 详细描述
+ * @param {参数类型} 参数 参数说明
+ */
+export function saveSpuInfo(data) {
+  return request({
+    url: '/admin/product/saveSpuInfo',
+    method: 'post',
+    data
+  })
+}
+/**
+ * @Date 2023-09-22 16:53:23
+ * @introduction 修改spu信息
+ * @description 详细描述
+ * @param {参数类型} 参数 参数说明
+ */
+export function updateSpuInfo(data) {
+  return request({
+    url: '/admin/product/updateSpuInfo',
+    method: 'post',
+    data
+  })
+}
+/**
+ * @Date 2023-09-22 16:59:20
+ * @introduction 删除spu信息
+ * @description 详细描述
+ * @param {参数类型} 参数 参数说明
+ */
+export function deleteSpuInfo(spuId) {
+  return request({
+    url: `/admin/product/deleteSpu/${spuId}`,
+    method: 'delete'
+  })
+}
+/**
+ * @Date 2023-09-22 15:18:53
+ * @introduction 根据spuId获取spuInfo
+ * @description 详细描述
+ * @param {参数类型} 参数 参数说明
+ */
+export function getSpuInfoById(spuId) {
+  return request({
+    url: `/admin/product/getSpuById/${spuId}`,
+  })
+}
+/**
+ * @Date 2023-09-22 16:32:24
+ * @introduction 根据spuId获取spuImage
+ * @description 详细描述
+ * @param {参数类型} 参数 参数说明
+ */
+export function getSpuImgsById(spuId) {
+  return request({
+    url: `/admin/product/spuImageList/${spuId}`,
+  })
+}
+/**
+ * @Date 2023-09-23 00:45:29
+ * @introduction 根据spuId获取销售属性
+ * @description 详细描述
+ * @param {参数类型} 参数 参数说明
+ */
+export function getSpuSaleAttrListById(spuId) {
+  return request({
+    url: `/admin/product/spuSaleAttrList/${spuId}`,
+  })
+}
+/**
+ * @Date 2023-09-23 15:29:52
+ * @introduction 保存sku信息
+ * @description 详细描述
+ * @param {参数类型} 参数 参数说明
+ */
+export function saveSkuInfo(data) {
+  return request({
+    url: '/admin/product/saveSkuInfo',
+    method: 'post',
+    data
+  })
+}
+/**
+ * @Date 2023-09-23 17:41:14
+ * @introduction 获取spu下的sku列表
+ * @description 详细描述
+ * @param {参数类型} 参数 参数说明
+ */
+export function findBySpuId(spuId) {
+  return request({
+    url: `/admin/product/findBySpuId/${spuId}`
+  })
+}

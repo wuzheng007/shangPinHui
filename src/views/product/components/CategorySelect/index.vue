@@ -1,6 +1,6 @@
 <template>
   <div class="category-select-container">
-    <el-form :model="form" inline :disabled="disabled">
+    <el-form :model="form" inline :disabled="disabled" label-width="6em">
       <el-form-item label="一级分类">
         <el-select v-model="form.cate1" placeholder="请选择" @change="handleChangeCate1">
           <el-option v-for="item in cate1List" :key="item.id" :value="item.id" :label="item.name">{{ item.name }}</el-option>

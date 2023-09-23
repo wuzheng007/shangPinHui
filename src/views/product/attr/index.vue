@@ -57,7 +57,7 @@
 
 <script>
 import cloneDeep from 'lodash/cloneDeep'
-import CategorySelect from './components/CategorySelect'
+import CategorySelect from '../components/CategorySelect'
 import { getAttrInfoList, saveAttrInfo, delAttr } from '@/api/product.js'
 export default {
   name: 'Attr',
