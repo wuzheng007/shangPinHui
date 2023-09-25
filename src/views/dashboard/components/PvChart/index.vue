@@ -1,11 +1,14 @@
 <template>
-  <div id="chart" ref="chart">4545</div>
+  <BaseChart width="100%" height="100%" :option="option"></BaseChart>
 </template>
 
 <script>
-import * as echarts from 'echarts';
+import BaseChart from '@/components/BaseChart'
 export default {
   name: 'PvChart',
+  components: {
+    BaseChart
+  },
   props: {
     data: {
       type: Array,
@@ -19,23 +22,9 @@ export default {
       // chart: null
     }
   },
-  watch: {
-    data: {
-      deep: true,
-      handler() {
-        this.init()
-      }
-    }
-  },
-  mounted() {
-    this.init()
-  },
-  methods: {
-    init() {
-      if (!this.chart) {
-        this.chart = echarts.init(this.$refs.chart)
-      }
-      this.chart.setOption({
+  computed: {
+    option() {
+      return {
         xAxis: {
           type: "category",
           show: false
@@ -77,15 +66,10 @@ export default {
         grid: {
           left: 10
         }
-      })
+      }
     }
-  },
+  }
 }
 </script>
 
-<style lang="scss" scoped>
-#chart {
-  width: 100%;
-  height: 100%;
-}
-</style>
+<style lang="scss" scoped></style>
