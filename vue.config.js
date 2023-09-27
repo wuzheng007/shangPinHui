@@ -37,6 +37,12 @@ module.exports = {
       errors: true
     },
     proxy: {
+      '/dev-api/admin/acl': {
+        target: 'http://39.98.123.211:8170',
+        ws: true,
+        changeOrigin: true,
+        pathRewrite: { '^/dev-api': '' }
+      },
       '/dev-api': {
         target: 'http://gmall-h5-api.atguigu.cn',
         ws: true,

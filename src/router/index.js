@@ -85,6 +85,31 @@ export const constantRoutes = [
         meta: { title: 'Sku管理' }
       }]
   },
+  {
+    path: '/permissionManagement',
+    component: Layout,
+    meta: { title: '权限管理', icon: 'el-icon-setting' },
+    children: [
+      {
+        path: 'user',
+        name: 'User',
+        component: () => import('@/views/permissionManagement/user/index'),
+        meta: { title: '用户管理' }
+      },
+      {
+        path: 'role',
+        name: 'Role',
+        component: () => import('@/views/permissionManagement/role'),
+        meta: { title: '角色管理' }
+      },
+      {
+        path: 'menu',
+        name: 'Menu',
+        component: () => import('@/views/permissionManagement/menu'),
+        meta: { title: '菜单管理' }
+      }
+    ]
+  },
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
 ]
