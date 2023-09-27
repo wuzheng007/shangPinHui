@@ -51,6 +51,12 @@ export default {
   },
   mounted() {
     this.initChart()
+    window.addEventListener('resize', this.handleResize)
+    this.$once('hook:beforeDestroy', () => {
+      window.removeEventListener('resize', this.handleResize)
+      this.chart.dispose()
+      this.chart = null
+    })
   },
   methods: {
     initChart() {
@@ -62,6 +68,9 @@ export default {
       const option = Object.assign(this.option, {})
       // 使用刚指定的配置项和数据显示图表
       this.chart.setOption(option)
+    },
+    handleResize() {
+      this.chart.resize()
     }
   },
 }
