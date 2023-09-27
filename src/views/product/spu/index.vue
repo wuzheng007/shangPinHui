@@ -5,8 +5,13 @@
     </el-card>
     <el-card>
       <div v-show="scene === 1">
-        <el-button type="primary" icon="el-icon-plus" size="small" :disabled="isDisableAddSpu"
-          @click="changeScene(2)">添加SPU</el-button>
+        <el-button
+          type="primary"
+          icon="el-icon-plus"
+          size="small"
+          :disabled="isDisableAddSpu"
+          @click="changeScene(2)"
+        >添加SPU</el-button>
         <el-table :data="tableData" border stripe>
           <el-table-column label="序号" type="index" width="60px" align="center" />
           <el-table-column label="SPU名称" align="center" prop="spuName" />
@@ -14,40 +19,51 @@
           <el-table-column label="操作" align="center">
             <template v-slot="{ row }">
               <el-tooltip content="添加sku" placement="top">
-                <el-button type="success" icon="el-icon-plus" size="mini" @click="handleRowAddSku(row)"></el-button>
+                <el-button type="success" icon="el-icon-plus" size="mini" @click="handleRowAddSku(row)" />
               </el-tooltip>
               <el-tooltip content="修改spu" placement="top">
-                <el-button type="warning" icon="el-icon-edit" size="mini" @click="handleRowEdit(row)"></el-button>
+                <el-button type="warning" icon="el-icon-edit" size="mini" @click="handleRowEdit(row)" />
               </el-tooltip>
               <el-tooltip content="查看当前spu全部sku列表" placement="top">
-                <el-button type="info" icon="el-icon-info" size="mini" @click="handleRowView(row)"></el-button>
+                <el-button type="info" icon="el-icon-info" size="mini" @click="handleRowView(row)" />
               </el-tooltip>
               <el-tooltip content="删除spu" placement="top">
-                <el-popconfirm confirmButtonText='确定' cancelButtonText='取消' icon="el-icon-info" style="margin-left: 10px;"
-                  iconColor="red" :title="`确定删除${row.spuName}吗？`" @onConfirm="handleRowDel(row)">
-                  <el-button slot="reference" type="danger" icon="el-icon-delete" size="mini"></el-button>
+                <el-popconfirm
+                  confirm-button-text="确定"
+                  cancel-button-text="取消"
+                  icon="el-icon-info"
+                  style="margin-left: 10px;"
+                  icon-color="red"
+                  :title="`确定删除${row.spuName}吗？`"
+                  @onConfirm="handleRowDel(row)"
+                >
+                  <el-button slot="reference" type="danger" icon="el-icon-delete" size="mini" />
                 </el-popconfirm>
               </el-tooltip>
             </template>
           </el-table-column>
         </el-table>
-        <el-pagination :current-page="params.page" :page-size="params.limit"
-          layout="sizes, prev, pager, next, jumper, ->, total" :total="total" @size-change="handleSizeChange"
-          @current-change="handleCurrentChange">
-        </el-pagination>
+        <el-pagination
+          :current-page="params.page"
+          :page-size="params.limit"
+          layout="sizes, prev, pager, next, jumper, ->, total"
+          :total="total"
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+        />
       </div>
-      <SpuForm v-if="scene === 2" :category3Id="selectedCate.cate3" :spu="spu" @close="handleClose"></SpuForm>
-      <SkuForm v-if="scene === 3" :cateIdInfo="selectedCate" :spu="spu" @close="handleClose"></SkuForm>
+      <SpuForm v-if="scene === 2" :category3id="selectedCate.cate3" :spu="spu" @close="handleClose" />
+      <SkuForm v-if="scene === 3" :cate-id-info="selectedCate" :spu="spu" @close="handleClose" />
     </el-card>
     <!-- 弹窗（显示sku信息） -->
     <el-dialog :title="`${spu.spuName}的sku列表`" :visible.sync="dialogVisible">
-      <el-table :data="skuTableData" border stripe max-height="400" v-loading="skuTableDataLoading">
-        <el-table-column label="名称" align="center" prop="skuName"></el-table-column>
-        <el-table-column label="价格" align="center" prop="price"></el-table-column>
-        <el-table-column label="重量" align="center" prop="weight"></el-table-column>
+      <el-table v-loading="skuTableDataLoading" :data="skuTableData" border stripe max-height="400">
+        <el-table-column label="名称" align="center" prop="skuName" />
+        <el-table-column label="价格" align="center" prop="price" />
+        <el-table-column label="重量" align="center" prop="weight" />
         <el-table-column label="默认图片" align="center">
           <template v-slot="{ row }">
-            <el-image style="width: 100px; height: 100px;" fit="contain" :src="row.skuDefaultImg"></el-image>
+            <el-image style="width: 100px; height: 100px;" fit="contain" :src="row.skuDefaultImg" />
           </template>
         </el-table-column>
       </el-table>
@@ -106,7 +122,7 @@ export default {
           this.fetchTableData()
         }
       }
-    },
+    }
   },
   methods: {
     async fetchTableData() {

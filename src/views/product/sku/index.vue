@@ -1,41 +1,51 @@
 <template>
   <div class="sku-container">
     <el-table :data="tableData" border stripe style="margin-bottom: 10px;">
-      <el-table-column type="index" align="center"></el-table-column>
-      <el-table-column label="名称" align="center" prop="skuName"></el-table-column>
-      <el-table-column label="描述" align="center" prop="skuDesc" min-width="150"></el-table-column>
+      <el-table-column type="index" align="center" />
+      <el-table-column label="名称" align="center" prop="skuName" />
+      <el-table-column label="描述" align="center" prop="skuDesc" min-width="150" />
       <el-table-column label="默认图片" align="center">
         <template v-slot="{ row }">
-          <el-image style="width: 100px; height: 100px;" fit="contain" :src="row.skuDefaultImg"></el-image>
+          <el-image style="width: 100px; height: 100px;" fit="contain" :src="row.skuDefaultImg" />
         </template>
       </el-table-column>
-      <el-table-column label="重量" align="center" prop="weight"></el-table-column>
-      <el-table-column label="价格" align="center" prop="price"></el-table-column>
+      <el-table-column label="重量" align="center" prop="weight" />
+      <el-table-column label="价格" align="center" prop="price" />
       <el-table-column label="操作" align="center" prop="" min-width="150">
         <template v-slot="{ row, $index }">
           <el-tooltip effect="dark" :content="row.isSale === 0 ? '上架' : '下架'" placement="top">
-            <el-button v-if="row.isSale === 0" type="success" icon="el-icon-top" size="mini"
-              @click="changeSaleState(row)"></el-button>
-            <el-button v-else type="warning" icon="el-icon-bottom" size="mini" @click="changeSaleState(row)"></el-button>
+            <el-button
+              v-if="row.isSale === 0"
+              type="success"
+              icon="el-icon-top"
+              size="mini"
+              @click="changeSaleState(row)"
+            />
+            <el-button v-else type="warning" icon="el-icon-bottom" size="mini" @click="changeSaleState(row)" />
           </el-tooltip>
           <el-tooltip effect="dark" content="修改" placement="top">
-            <el-button type="primary" icon="el-icon-edit" size="mini" @click="handleRowEdit(row)"></el-button>
+            <el-button type="primary" icon="el-icon-edit" size="mini" @click="handleRowEdit(row)" />
           </el-tooltip>
           <el-tooltip effect="dark" content="查看详情" placement="top">
-            <el-button type="info" icon="el-icon-info" size="mini" @click="handleRowView(row)"></el-button>
+            <el-button type="info" icon="el-icon-info" size="mini" @click="handleRowView(row)" />
           </el-tooltip>
           <el-tooltip effect="dark" content="删除" placement="top" style="margin-left: 10px;">
             <el-popconfirm :title="`确定删除${row.skuName}吗？`" @onConfirm="handleRowDelete(row)">
-              <el-button slot="reference" type="danger" icon="el-icon-delete" size="mini"></el-button>
+              <el-button slot="reference" type="danger" icon="el-icon-delete" size="mini" />
             </el-popconfirm>
           </el-tooltip>
         </template>
       </el-table-column>
     </el-table>
-    <el-pagination style="text-align: center;" @size-change="handleSizeChange" @current-change="handleCurrentChange"
-      :current-page="params.page" :page-size="params.limit" layout="total, sizes, prev, pager, next, jumper"
-      :total="total">
-    </el-pagination>
+    <el-pagination
+      style="text-align: center;"
+      :current-page="params.page"
+      :page-size="params.limit"
+      layout="total, sizes, prev, pager, next, jumper"
+      :total="total"
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+    />
     <!-- 查看详情抽屉 -->
     <el-drawer size="40%" :title="drawerTitle" :visible.sync="drawerVisible">
       <div v-loading="drawerContentLoading">
@@ -62,7 +72,7 @@
           <el-col :span="18">
             <el-carousel height="200px">
               <el-carousel-item v-for="item in sku.skuImageList" :key="item.id">
-                <el-image :src="item.imgUrl" style="width: 100%; height: 100%" fit="contain"></el-image>
+                <el-image :src="item.imgUrl" style="width: 100%; height: 100%" fit="contain" />
               </el-carousel-item>
             </el-carousel>
           </el-col>

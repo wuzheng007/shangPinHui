@@ -2,17 +2,17 @@
 export function genPvOption(data) {
   return {
     xAxis: {
-      type: "category",
+      type: 'category',
       boundaryGap: false,
       show: false,
-      data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+      data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
     },
     yAxis: {
-      type: "value",
+      type: 'value',
       show: false
     },
     series: [{
-      type: "line",
+      type: 'line',
       data: data,
       smooth: true, // 是否平滑曲线显示
       itemStyle: { // 折线拐点标志的样式
@@ -40,7 +40,7 @@ export function genPvOption(data) {
           ],
           global: false // 缺省为 false
         }
-      },
+      }
     }],
     grid: {
       left: 0,
@@ -84,7 +84,7 @@ export function genOperationEffectOption(data) {
     },
     yAxis: {
       type: 'category',
-      show: false,
+      show: false
     },
     series: [
       {
@@ -115,7 +115,7 @@ export function genOperationEffectOption(data) {
 export function genBigBarOption(data, color, title) {
   return {
     title: {
-      text: title,
+      text: title
     },
     xAxis: {
       type: 'category',
@@ -125,7 +125,7 @@ export function genBigBarOption(data, color, title) {
       type: 'value',
       axisLine: {
         show: true // 是否显示坐标轴轴线。
-      },
+      }
     },
     tooltip: { // // 提示框组件
       trigger: 'axis', // 触发类型。item 会在每个数据项图形上触发提示框，axis 会在坐标轴触发。
@@ -154,12 +154,12 @@ export function genBigBarOption(data, color, title) {
 // 生成销售额类别占比图表配置
 export function genSaleCateRatioOption(data) {
   return {
-    tooltip:{},
+    tooltip: {},
     series: [
       {
         type: 'pie',
         radius: ['40%', '70%'], // 饼图的半径，数组的第一项是内半径，第二项是外半径
-        data: data,
+        data: data
       }
     ],
     graphic: [

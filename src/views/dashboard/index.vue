@@ -9,11 +9,11 @@
               <div class="chart">
                 <span>周同比 56.67%</span>
                 <svg class="icon" aria-hidden="true" style="margin: 0 5px;">
-                  <use xlink:href="#icon-up"></use>
+                  <use xlink:href="#icon-up" />
                 </svg>
                 <span>日同比 19.96%</span>
                 <svg class="icon" aria-hidden="true" style="margin: 0 5px;">
-                  <use xlink:href="#icon-down"></use>
+                  <use xlink:href="#icon-down" />
                 </svg>
               </div>
             </div>
@@ -31,7 +31,7 @@
             <div class="card-main-content">
               <p class="count">88460</p>
               <div class="chart">
-                <BaseChart width="100%" height="100%" :option="pvOption"></BaseChart>
+                <BaseChart width="100%" height="100%" :option="pvOption" />
               </div>
             </div>
           </template>
@@ -46,7 +46,7 @@
             <div class="card-main-content">
               <p class="count">2536</p>
               <div class="chart">
-                <BaseChart width="100%" height="100%" :option="paymentNumberOption"></BaseChart>
+                <BaseChart width="100%" height="100%" :option="paymentNumberOption" />
               </div>
             </div>
           </template>
@@ -61,8 +61,7 @@
             <div class="card-main-content">
               <p class="count">{{ genOperationEffectDate[0] }}%</p>
               <div class="chart">
-                <BaseChart width="100%" height="100%" :option="operationEffectOption">
-                </BaseChart>
+                <BaseChart width="100%" height="100%" :option="operationEffectOption" />
               </div>
             </div>
           </template>
@@ -70,11 +69,11 @@
             <div class="card-footer">
               <span>周同比 56.67%</span>
               <svg class="icon" aria-hidden="true" style="margin: 0 5px;">
-                <use xlink:href="#icon-up"></use>
+                <use xlink:href="#icon-up" />
               </svg>
               <span>日同比 19.96%</span>
               <svg class="icon" aria-hidden="true" style="margin: 0 5px;">
-                <use xlink:href="#icon-down"></use>
+                <use xlink:href="#icon-down" />
               </svg>
             </div>
           </template>
@@ -83,34 +82,42 @@
     </el-row>
     <el-card class="big-card">
       <el-tabs v-model="activeTabName">
-        <el-tab-pane label="销售额" name="first"></el-tab-pane>
-        <el-tab-pane label="访问量" name="second"></el-tab-pane>
+        <el-tab-pane label="销售额" name="first" />
+        <el-tab-pane label="访问量" name="second" />
       </el-tabs>
       <!-- 日期选择 -->
       <div class="select-date">
         <ul class="ul">
-          <li @click="changeDateType('day')" :class="{ active: selectDateType === 'day' }">今日</li>
-          <li @click="changeDateType('week')" :class="{ active: selectDateType === 'week' }">本周</li>
-          <li @click="changeDateType('month')" :class="{ active: selectDateType === 'month' }">本月</li>
-          <li @click="changeDateType('year')" :class="{ active: selectDateType === 'year' }">本年</li>
+          <li :class="{ active: selectDateType === 'day' }" @click="changeDateType('day')">今日</li>
+          <li :class="{ active: selectDateType === 'week' }" @click="changeDateType('week')">本周</li>
+          <li :class="{ active: selectDateType === 'month' }" @click="changeDateType('month')">本月</li>
+          <li :class="{ active: selectDateType === 'year' }" @click="changeDateType('year')">本年</li>
         </ul>
-        <el-date-picker v-model="curDate" value-format="yyyy-MM-dd" type="daterange" range-separator="至"
-          start-placeholder="开始日期" end-placeholder="结束日期" size="small" :clearable="false" @change="changeDate">
-        </el-date-picker>
+        <el-date-picker
+          v-model="curDate"
+          value-format="yyyy-MM-dd"
+          type="daterange"
+          range-separator="至"
+          start-placeholder="开始日期"
+          end-placeholder="结束日期"
+          size="small"
+          :clearable="false"
+          @change="changeDate"
+        />
       </div>
       <el-row>
         <el-col :span="18">
-          <BaseChart width="100%" height="300px" :option="bigBarOption"></BaseChart>
+          <BaseChart width="100%" height="300px" :option="bigBarOption" />
         </el-col>
         <el-col :span="6">
           <p class="sort-title">{{ sortTitle }}</p>
           <ul class="sort-list">
-            <li class="sort-item" v-for="(item, index) in sortData" :key="index">
+            <li v-for="(item, index) in sortData" :key="index" class="sort-item">
               <span class="level">{{ index + 1 }}</span>
               <span class="name">{{ item.name }}</span>
               <span class="amount">{{ item.amount }}</span>
             </li>
-            <li class="empty" v-if="sortData.length === 0">暂无数据</li>
+            <li v-if="sortData.length === 0" class="empty">暂无数据</li>
           </ul>
         </el-col>
       </el-row>
@@ -121,7 +128,7 @@
           <div slot="header">
             <span>线上热门搜索</span>
             <el-dropdown style="float: right;">
-              <i class="el-icon-more"></i>
+              <i class="el-icon-more" />
               <el-dropdown-menu slot="dropdown">
                 <el-dropdown-item>黄金糕</el-dropdown-item>
                 <el-dropdown-item>狮子头</el-dropdown-item>
@@ -136,44 +143,44 @@
               <div class="sub-title">
                 <span style="margin-right: 10px;">搜索用户数</span>
                 <svg class="icon" aria-hidden="true">
-                  <use xlink:href="#icon-xinxi1"></use>
+                  <use xlink:href="#icon-xinxi1" />
                 </svg>
               </div>
               <div class="index-num">
                 <span class="count">12321</span>
                 <span class="percent-num">17.1</span>
                 <svg class="icon" aria-hidden="true" style="margin: 0 5px;">
-                  <use xlink:href="#icon-up"></use>
+                  <use xlink:href="#icon-up" />
                 </svg>
               </div>
               <div>
-                <BaseChart width="100%" height="50px" :option="pvOption"></BaseChart>
+                <BaseChart width="100%" height="50px" :option="pvOption" />
               </div>
             </el-col>
             <el-col :span="12">
               <div class="sub-title">
                 <span style="margin-right: 10px;">人均搜索次数</span>
                 <svg class="icon" aria-hidden="true">
-                  <use xlink:href="#icon-xinxi1"></use>
+                  <use xlink:href="#icon-xinxi1" />
                 </svg>
               </div>
               <div class="index-num">
                 <span class="count">2.7</span>
                 <span class="percent-num">26.1</span>
                 <svg class="icon" aria-hidden="true" style="margin: 0 5px;">
-                  <use xlink:href="#icon-down"></use>
+                  <use xlink:href="#icon-down" />
                 </svg>
               </div>
               <div>
-                <BaseChart width="100%" height="50px" :option="pvOption"></BaseChart>
+                <BaseChart width="100%" height="50px" :option="pvOption" />
               </div>
             </el-col>
           </el-row>
           <el-table :data="hotSearchTableData" stripe height="200">
-            <el-table-column label="排名" type="index" align="center" width="80"></el-table-column>
-            <el-table-column label="搜索关键字" align="center" prop="keyword"></el-table-column>
-            <el-table-column label="用户数" align="center" sortable prop="userNum"></el-table-column>
-            <el-table-column label="周涨幅" align="center" sortable prop="weekIncrease"></el-table-column>
+            <el-table-column label="排名" type="index" align="center" width="80" />
+            <el-table-column label="搜索关键字" align="center" prop="keyword" />
+            <el-table-column label="用户数" align="center" sortable prop="userNum" />
+            <el-table-column label="周涨幅" align="center" sortable prop="weekIncrease" />
           </el-table>
         </el-card>
       </el-col>
@@ -182,20 +189,19 @@
           <div slot="header">
             <span>销售额类别占比</span>
             <el-radio-group v-model="selectChannel" size="mini" style="float: right;">
-              <el-radio-button label="全部渠道"></el-radio-button>
-              <el-radio-button label="线上"></el-radio-button>
-              <el-radio-button label="门店"></el-radio-button>
+              <el-radio-button label="全部渠道" />
+              <el-radio-button label="线上" />
+              <el-radio-button label="门店" />
             </el-radio-group>
           </div>
-          <BaseChart ref="saleCateRatioChart" width="100%" height="100%" :option="saleCateRatioOption"></BaseChart>
+          <BaseChart ref="saleCateRatioChart" width="100%" height="100%" :option="saleCateRatioOption" />
         </el-card>
       </el-col>
     </el-row>
   </div>
 </template>
-
 <script>
-import moment from 'moment';
+import moment from 'moment'
 moment.locale('zh-cn')
 import BaseChart from '@/components/BaseChart'
 import CardItem from './components/CardItem'
@@ -234,34 +240,34 @@ export default {
           weekIncrease: '8.9%'
         },
         {
-          keyword: '奔驰sfdajkl jlasdfjkl jklsdfjkl jksfjkld klj',
+          keyword: '奔驰',
           userNum: 37,
           weekIncrease: '7.1%'
         }
       ],
       selectChannel: '全部渠道', // 选中的渠道
-      saleCateRatioData: [  // 销售额类别占比数据
+      saleCateRatioData: [ // 销售额类别占比数据
         {
           name: '视频广告',
-          value: 300,
+          value: 300
         },
         {
           name: '联盟广告',
-          value: 484,
+          value: 484
         },
         {
           name: '邮件营销',
-          value: 580,
+          value: 580
         },
         {
           name: '直接访问',
-          value: 625,
+          value: 625
         },
         {
           name: '搜索引擎',
-          value: 1350,
+          value: 1350
         }
-      ],
+      ]
     }
   },
   computed: {
@@ -282,11 +288,11 @@ export default {
       const colorMap = {
         first: {
           title: '销售额',
-          color: '#b6a014',
+          color: '#b6a014'
         },
         second: {
           title: '访问量',
-          color: '#a76283',
+          color: '#a76283'
         }
       }
       return genBigBarOption(this.bigBarData, colorMap[this.activeTabName].color, colorMap[this.activeTabName].title)
@@ -346,7 +352,7 @@ export default {
     this.$refs.saleCateRatioChart.chart.on('click', (e) => {
       console.log(e)
       const { name, value } = e
-      if(!name || !value && value !== 0) {
+      if (!name || !value && value !== 0) {
         return
       }
       this.$refs.saleCateRatioChart.chart.setOption({
@@ -483,7 +489,6 @@ p {
   }
 }
 
-
 .big-card {
   position: relative;
   margin: 10px 0;
@@ -551,8 +556,6 @@ p {
       .name {
         flex: 1;
       }
-
-      .amount {}
     }
 
     .empty {
