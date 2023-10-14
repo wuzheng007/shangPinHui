@@ -17,6 +17,7 @@
     "axios": "0.18.1",
     "core-js": "3.6.5",
     "echarts": "^5.4.3",
+    "element-resize-detector": "^1.2.4",
     "element-ui": "2.13.2",
     "js-cookie": "2.2.0",
     "lodash": "^4.17.21",

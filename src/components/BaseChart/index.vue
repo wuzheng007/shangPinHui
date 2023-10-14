@@ -4,23 +4,25 @@
 
 <script>
 import * as echarts from 'echarts'
+// 优化了元素的跨浏览器调整大小监听器
+import elementResizeDetectorMaker from 'element-resize-detector'
 export default {
   name: 'BaseChart',
   props: {
     // 图表的宽度
     width: {
       type: String,
-      required: true,
+      default: '600px'
     },
     // 图表的高度
     height: {
       type: String,
-      required: true,
+      default: '400px'
     },
     // 图表的配置项和数据
     option: {
       type: Object,
-      required: true,
+      required: true
     }
   },
   data() {
@@ -31,7 +33,7 @@ export default {
   computed: {
     style() {
       return {
-        width: this.watch,
+        width: this.width,
         height: this.height
       }
     }
@@ -51,14 +53,18 @@ export default {
   },
   mounted() {
     this.initChart()
-    window.addEventListener('resize', this.handleResize)
-    this.$once('hook:beforeDestroy', () => {
-      window.removeEventListener('resize', this.handleResize)
-      this.chart.dispose()
-      this.chart = null
-    })
+    this.handleResize()
+  },
+  beforeDestroy() {
+    if (!this.chart) {
+      return
+    }
+    // 销毁图表实例
+    this.chart.dispose()
+    this.chart = null
   },
   methods: {
+    // 初始化图表
     initChart() {
       // 如果没有图表实例，则创建一个新的实例
       if (!this.chart) {
@@ -69,11 +75,15 @@ export default {
       // 使用刚指定的配置项和数据显示图表
       this.chart.setOption(option)
     },
+    // 处理图表容器大小变化
     handleResize() {
-      this.chart.resize()
+      const erd = elementResizeDetectorMaker()
+      // 监听图表容器的大小变化
+      erd.listenTo(this.$refs.chart, () => {
+        // 改变图表尺寸
+        this.chart.resize()
+      })
     }
-  },
+  }
 }
 </script>
-
-<style lang="scss" scoped></style>
