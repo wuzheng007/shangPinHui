@@ -191,3 +191,54 @@ export function setRoleAssignAuth(params) {
     params
   })
 }
+
+/**
+ * @Date 2023-10-14 21:31:07
+ * @introduction 获取菜单
+ * @description 详细描述
+ * @param {参数类型} 参数 参数说明
+ */
+export function getPermissionList() {
+  return request({
+    url: '/admin/acl/permission'
+  })
+}
+
+/**
+ * @Date 2023-10-14 23:43:22
+ * @introduction 新增菜单（包括菜单和按钮权限）
+ * @description 详细描述
+ * @param {参数类型} 参数 参数说明
+ */
+export function addPermission(data) {
+  return request({
+    url: '/admin/acl/permission/save',
+    method: 'post',
+    data
+  })
+}
+/**
+ * @Date 2023-10-14 23:44:55
+ * @introduction 修改菜单（包括菜单和按钮权限）
+ * @description 详细描述
+ * @param {参数类型} 参数 参数说明
+ */
+export function updatePermission(data) {
+  return request({
+    url: '/admin/acl/permission/update',
+    method: 'put',
+    data
+  })
+}
+/**
+ * @Date 2023-10-15 00:13:27
+ * @introduction 删除菜单及其子节点（包括菜单和按钮权限）
+ * @description 详细描述
+ * @param {参数类型} 参数 参数说明
+ */
+export function removePermission(id) {
+  return request({
+    url: `/admin/acl/permission/remove/${id}`,
+    method: 'delete'
+  })
+}
