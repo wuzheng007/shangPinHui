@@ -165,3 +165,29 @@ export function updateRole(data) {
     data
   })
 }
+
+/**
+ * @Date 2023-10-14 17:22:05
+ * @introduction 根据角色获取菜单
+ * @description 详细描述
+ * @param {参数类型} 参数 参数说明
+ */
+export function getRoleAssignMenu(roleId) {
+  return request({
+    url: `/admin/acl/permission/toAssign/${roleId}`
+  })
+}
+
+/**
+ * @Date 2023-10-14 20:59:19
+ * @introduction 设置角色分配权限
+ * @description 详细描述
+ * @param {参数类型} 参数 参数说明
+ */
+export function setRoleAssignAuth(params) {
+  return request({
+    url: '/admin/acl/permission/doAssign',
+    method: 'post',
+    params
+  })
+}

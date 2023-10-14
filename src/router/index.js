@@ -103,6 +103,13 @@ export const constantRoutes = [
         meta: { title: '角色管理' }
       },
       {
+        path: 'roleAuth',
+        name: 'RoleAuth',
+        component: () => import('@/views/permissionManagement/role/roleAuth'),
+        meta: { title: '角色授权' },
+        hidden: true
+      },
+      {
         path: 'menu',
         name: 'Menu',
         component: () => import('@/views/permissionManagement/menu'),

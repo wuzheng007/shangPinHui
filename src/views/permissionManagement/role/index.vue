@@ -176,7 +176,13 @@ export default {
     },
     // 表格行分配角色按钮点击事件
     handleRowDistribution(row) {
-
+      this.$router.push({
+        name: 'RoleAuth',
+        query: {
+          id: row.id,
+          roleName: row.roleName
+        }
+      })
     },
     // 表格行编辑图标按钮点击事件
     handleStartEdit(row) {
