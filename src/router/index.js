@@ -119,7 +119,7 @@ export const asyncRoutes = [
       }
     ]
   },
-  // 404 page must be placed at the end !!!
+  // 注意：通配符路由一定要放在最后
   { path: '*', redirect: '/404', hidden: true }
 ]
 const createRouter = () => new Router({
