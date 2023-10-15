@@ -36,13 +36,11 @@ export const constantRoutes = [
     component: () => import('@/views/login/index'),
     hidden: true
   },
-
   {
     path: '/404',
     component: () => import('@/views/404'),
     hidden: true
   },
-
   {
     path: '/',
     component: Layout,
@@ -53,7 +51,11 @@ export const constantRoutes = [
       component: () => import('@/views/dashboard/index'),
       meta: { title: '首页', icon: 'dashboard' }
     }]
-  },
+  }
+]
+
+// 需要权限控制的路由(需用与后端返回的用户可访问路由列表进行匹配,然后动态添加路由)
+export const asyncRoutes = [
   {
     path: '/product',
     component: Layout,
@@ -86,33 +88,33 @@ export const constantRoutes = [
       }]
   },
   {
-    path: '/permissionManagement',
+    path: '/acl',
     component: Layout,
     meta: { title: '权限管理', icon: 'el-icon-setting' },
     children: [
       {
         path: 'user',
         name: 'User',
-        component: () => import('@/views/permissionManagement/user/index'),
+        component: () => import('@/views/acl/user/index'),
         meta: { title: '用户管理' }
       },
       {
         path: 'role',
         name: 'Role',
-        component: () => import('@/views/permissionManagement/role'),
+        component: () => import('@/views/acl/role'),
         meta: { title: '角色管理' }
       },
       {
         path: 'roleAuth',
         name: 'RoleAuth',
-        component: () => import('@/views/permissionManagement/role/roleAuth'),
+        component: () => import('@/views/acl/role/roleAuth'),
         meta: { title: '角色授权' },
         hidden: true
       },
       {
-        path: 'menu',
-        name: 'Menu',
-        component: () => import('@/views/permissionManagement/menu'),
+        path: 'permission',
+        name: 'Permission',
+        component: () => import('@/views/acl/permission'),
         meta: { title: '菜单管理' }
       }
     ]
@@ -120,7 +122,6 @@ export const constantRoutes = [
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
 ]
-
 const createRouter = () => new Router({
   // mode: 'history', // require service support
   scrollBehavior: () => ({ y: 0 }),

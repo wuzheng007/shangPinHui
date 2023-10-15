@@ -1,28 +1,20 @@
 <template>
   <div>
     <el-table
+      v-loading="tableLoading"
       :data="tableData"
       style="width: 100%;"
       row-key="id"
       border
       stripe
       :expand-row-keys="expandRowKeys"
-      :tree-props="{children: 'children', hasChildren: 'hasChildren'}"
+      :tree-props="{ children: 'children', hasChildren: 'hasChildren' }"
     >
-      <el-table-column
-        prop="name"
-        label="名称"
-      />
-      <el-table-column
-        prop="code"
-        label="权限值"
-      />
-      <el-table-column
-        prop="toCode"
-        label="跳转权限值"
-      />
+      <el-table-column prop="name" label="名称" />
+      <el-table-column prop="code" label="权限值" />
+      <el-table-column prop="toCode" label="跳转权限值" />
       <el-table-column label="操作">
-        <template v-slot="{row}">
+        <template v-slot="{ row }">
           <el-tooltip v-if="row.level !== 4" effect="dark" :content="row.level !== 3 ? '添加菜单' : '添加功能'" placement="top">
             <el-button type="primary" size="mini" icon="el-icon-plus" @click="handleAdd(row)" />
           </el-tooltip>
@@ -37,7 +29,7 @@
     </el-table>
     <el-dialog :visible.sync="dialogVisible" :title="dialogTitle" @closed="handleClosed">
       <el-form ref="form" :model="form" :rules="rules" label-width="8em" :validate-on-rule-change="false">
-        <el-form-item v-if="[2,3].includes(form.level)" label="父级名称">
+        <el-form-item v-if="[2, 3].includes(form.level)" label="父级名称">
           <el-input :value="parentName" disabled />
         </el-form-item>
         <el-form-item label="名称" prop="name">
@@ -61,10 +53,11 @@
 <script>
 import { getPermissionList, addPermission, updatePermission, removePermission } from '@/api/permissionManagement'
 export default {
-  name: 'Menu',
+  name: 'Permission',
   data() {
     return {
       tableData: [],
+      tableLoading: false,
       expandRowKeys: [], // 展开的行
       dialogVisible: false, // 弹窗显隐
       dialogTitle: '', // 弹窗标题
@@ -94,12 +87,17 @@ export default {
   },
   methods: {
     async fetchTableData() {
-      const { code, data } = await getPermissionList()
-      if (![200, 20000].includes(code)) {
-        return this.$message.error('获取数据失败')
+      try {
+        this.tableLoading = true
+        const { code, data } = await getPermissionList()
+        if (![200, 20000].includes(code)) {
+          return this.$message.error('获取数据失败')
+        }
+        this.tableData = data.children
+        this.expandRowKeys = [data.children[0].id]
+      } finally {
+        this.tableLoading = false
       }
-      this.tableData = data.children
-      this.expandRowKeys = [data.children[0].id]
     },
     // 表格添加按钮处理
     handleAdd(row) {
@@ -186,6 +184,4 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

@@ -26,15 +26,18 @@ router.beforeEach(async(to, from, next) => {
       next({ path: '/' })
       NProgress.done()
     } else {
+      // 用户信息内包含多个信息（用户名、用户头像、可访问的异步路由名称列表、按钮权限列表、角色列表）
       const hasGetUserInfo = store.getters.name
       if (hasGetUserInfo) {
         next()
       } else {
         try {
-          // get user info
-          await store.dispatch('user/getInfo')
-
-          next()
+          // 获取用户信息
+          // routes是用户可访问的异步路由名称列表
+          const { routes } = await store.dispatch('user/getInfo')
+          const accessRoutes = await store.dispatch('permission/generateRoutes', routes)
+          router.addRoutes(accessRoutes)
+          next({ ...to, replace: true })
         } catch (error) {
           // remove token and go to login page to re-login
           await store.dispatch('user/resetToken')
