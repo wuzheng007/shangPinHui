@@ -1,5 +1,6 @@
 'use strict'
 const path = require('path')
+const webpack = require('webpack')
 const defaultSettings = require('./src/settings.js')
 
 function resolve(dir) {
@@ -65,7 +66,16 @@ module.exports = {
       alias: {
         '@': resolve('src')
       }
-    }
+    },
+    plugins: [
+      new webpack.IgnorePlugin({
+        resourceRegExp: /^\.\/locale$/,
+        contextRegExp: /moment$/
+      })
+    ]
+    /* externals: {
+      echarts: 'echarts'
+    } */
   },
   chainWebpack(config) {
     // it can improve the speed of the first screen, it is recommended to turn on preload
@@ -113,6 +123,8 @@ module.exports = {
           config
             .optimization.splitChunks({
               chunks: 'all',
+              minSize: 100 * 1024, // 模块大于100KB时才会被分割出来。默认20k
+              maxSize: 0, // 生成的块的最大大小，如果超过了这个限制，大块会被拆分成多个小块， 默认值为0，表示不限制最大大小
               cacheGroups: {
                 libs: {
                   name: 'chunk-libs',
@@ -121,8 +133,8 @@ module.exports = {
                   chunks: 'initial' // only package third parties that are initially dependent
                 },
                 elementUI: {
-                  name: 'chunk-elementUI', // split elementUI into a single package
-                  priority: 20, // the weight needs to be larger than libs and app or it will be packaged into libs or app
+                  name: 'chunk-elementUI', // split elementUI into a single package 将elementUI拆分为一个包
+                  priority: 20, // the weight needs to be larger than libs and app or it will be packaged into libs or app 优先级需要大于lib和app，否则将被打包到lib或app中
                   test: /[\\/]node_modules[\\/]_?element-ui(.*)/ // in order to adapt to cnpm
                 },
                 commons: {

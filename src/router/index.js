@@ -64,7 +64,7 @@ export const asyncRoutes = [
     children: [
       {
         path: 'brand',
-        name: 'Brand',
+        name: 'Trademark',
         component: () => import('@/views/product/brand/index'),
         meta: { title: '品牌管理' }
       },
@@ -90,6 +90,7 @@ export const asyncRoutes = [
   {
     path: '/acl',
     component: Layout,
+    redirect: '/acl/user',
     meta: { title: '权限管理', icon: 'el-icon-setting' },
     children: [
       {

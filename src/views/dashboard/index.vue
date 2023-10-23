@@ -201,8 +201,11 @@
   </div>
 </template>
 <script>
-import moment from 'moment'
-moment.locale('zh-cn')
+import * as dayjs from 'dayjs'
+import * as isLeapYear from 'dayjs/plugin/isLeapYear' // 导入插件
+import 'dayjs/locale/zh-cn' // 导入本地化语言
+dayjs.extend(isLeapYear) // 使用插件
+dayjs.locale('zh-cn') // 使用本地化语言
 import BaseChart from '@/components/BaseChart'
 import CardItem from './components/CardItem'
 import { genPvOption, genPaymentNumberOption, genOperationEffectOption, genBigBarOption, genSaleCateRatioOption } from './chartOptions.js'
@@ -347,7 +350,7 @@ export default {
     }
   },
   mounted() {
-    this.curDate = [moment().startOf(this.selectDateType).format('YYYY-MM-DD'), moment().endOf(this.selectDateType).format('YYYY-MM-DD')]
+    this.curDate = [dayjs().startOf(this.selectDateType).format('YYYY-MM-DD'), dayjs().endOf(this.selectDateType).format('YYYY-MM-DD')]
     // 监听销售额类别占比图表的点击事件，点击时在饼图中间显示对应的数据
     this.$refs.saleCateRatioChart.chart.on('click', (e) => {
       console.log(e)
@@ -377,21 +380,21 @@ export default {
     // 改变选中日期类型
     changeDateType(type) {
       this.selectDateType = type
-      const start = moment().startOf(type).format('YYYY-MM-DD')
-      const end = moment().endOf(type).format('YYYY-MM-DD')
+      const start = dayjs().startOf(type).format('YYYY-MM-DD')
+      const end = dayjs().endOf(type).format('YYYY-MM-DD')
       this.curDate = [start, end]
     },
     // 用户确认选定的值时触发
     changeDate(e) {
       // 获取今日，本周，本月，本年的开始和结束时间
-      const dayStart = moment().startOf('day').format('YYYY-MM-DD')
-      const dayEnd = moment().endOf('day').format('YYYY-MM-DD')
-      const weekStart = moment().startOf('week').format('YYYY-MM-DD')
-      const weekEnd = moment().endOf('week').format('YYYY-MM-DD')
-      const monthStart = moment().startOf('month').format('YYYY-MM-DD')
-      const monthEnd = moment().endOf('month').format('YYYY-MM-DD')
-      const yearStart = moment().startOf('year').format('YYYY-MM-DD')
-      const yearEnd = moment().endOf('year').format('YYYY-MM-DD')
+      const dayStart = dayjs().startOf('day').format('YYYY-MM-DD')
+      const dayEnd = dayjs().endOf('day').format('YYYY-MM-DD')
+      const weekStart = dayjs().startOf('week').format('YYYY-MM-DD')
+      const weekEnd = dayjs().endOf('week').format('YYYY-MM-DD')
+      const monthStart = dayjs().startOf('month').format('YYYY-MM-DD')
+      const monthEnd = dayjs().endOf('month').format('YYYY-MM-DD')
+      const yearStart = dayjs().startOf('year').format('YYYY-MM-DD')
+      const yearEnd = dayjs().endOf('year').format('YYYY-MM-DD')
       const [start, end] = e
       if (start === dayStart && end === dayEnd) {
         this.selectDateType = 'day'
@@ -409,14 +412,14 @@ export default {
     mockBigBarData() {
       const [start, end] = this.curDate
       // 计算两个日期间隔的天数
-      const days = moment(end).diff(moment(start), 'days')
+      const days = dayjs(end).diff(dayjs(start), 'days')
       const data = []
       for (let i = 0; i <= days; i++) {
         // 生成日期和随机数
-        const time = moment(start).add(i, 'days').format('YYYY-MM-DD')
+        const time = dayjs(start).add(i, 'days').format('YYYY-MM-DD')
         const value = Math.floor(Math.random() * 1000)
         // 生成日期在当天之后，跳出循环
-        if (moment(time).isAfter(moment().format('YYYY-MM-DD'))) {
+        if (dayjs(time).isAfter(dayjs().format('YYYY-MM-DD'))) {
           continue
         }
         data.push({
